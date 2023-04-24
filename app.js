@@ -1,10 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const authRoutes = require("./routes/authRoutes");
 require("dotenv").config();
 
 const app = express();
 
-const PORT = process.env.PORT || 6666;
+const PORT = process.env.PORT || 6000;
 
 // middleware
 app.use(express.static("public"));
@@ -25,6 +26,7 @@ mongoose
 // routes
 app.get("/", (req, res) => res.render("home"));
 app.get("/smoothies", (req, res) => res.render("smoothies"));
+app.use(authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port: ${PORT}`);
